@@ -31,9 +31,9 @@ namespace SunData
         public DateTime astronomical_twilight_end { get; set; }
 
     }
-    internal class AnalemmaSettings
+    internal class SunDataSettings
     {
-        public AnalemmaSettings() 
+        public SunDataSettings() 
         {
             Latitude = 57.01375;
             Longitude = 9.97723;
@@ -44,7 +44,7 @@ namespace SunData
 
         }
 
-        public AnalemmaSettings(string a_Settings_Path, string customFormat) : this() 
+        public SunDataSettings(string a_Settings_Path, string customFormat) : this() 
         {
             DataFolder = Path.GetDirectoryName(a_Settings_Path);
             DataFileName = Path.GetFileName(a_Settings_Path);

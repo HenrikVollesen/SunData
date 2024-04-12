@@ -13,7 +13,7 @@ namespace SunData
         public string csvPath { get; set; }
         public TimeSpan ts { get; set; }
 
-        public async Task LogAnalemmaData(AnalemmaSettings loggerSettings)
+        public async Task LogAnalemmaData(SunDataSettings loggerSettings)
         {
             csvPath = loggerSettings.DataFolder + @"\" + loggerSettings.DataFileName;
             WriteHeaderline();
@@ -63,7 +63,7 @@ namespace SunData
             dataContents += "\n";
         }
 
-        private void WriteData(AnalemmaSettings loggerSettings)
+        private void WriteData(SunDataSettings loggerSettings)
         {
             CultureInfo cultureDK = CultureInfo.GetCultureInfo("da-DK");
             List<AnalemmaData> theData = loggerSettings.theAnalemmaData;

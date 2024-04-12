@@ -28,7 +28,7 @@ namespace SunData
          */
         //public static void CalculateSunPosition(
         //    DateTime Date, double latitude, double longitude)
-        public static void CalculateSunPosition(AnalemmaSettings loggerSettings)
+        public static void CalculateSunPosition(SunDataSettings loggerSettings)
         {
             DateTime dateTime = loggerSettings.dateTime;
             double latitude = loggerSettings.Latitude;

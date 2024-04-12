@@ -11,7 +11,7 @@ namespace SunData
         public string csvPath { get; set; }
         public TimeSpan ts { get; set; }
 
-        public async Task LogSunData(AnalemmaSettings loggerSettings)
+        public async Task LogSunData(SunDataSettings loggerSettings)
         {
             string theURI = @"https://api.sunrise-sunset.org/json";
 
@@ -105,7 +105,7 @@ namespace SunData
             dataContents += "\n";
         }
 
-        private void WriteData(AnalemmaSettings loggerSettings)
+        private void WriteData(SunDataSettings loggerSettings)
         {
             CultureInfo cultureDK = CultureInfo.GetCultureInfo("da-DK");
             List<SunData> theData = loggerSettings.theSunData;
@@ -125,7 +125,14 @@ namespace SunData
                 dataContents += "\n";
             }
 
-            File.WriteAllText(csvPath, dataContents);
+            try
+            {
+                File.WriteAllText(csvPath, dataContents);
+            }
+            catch (System.IO.IOException)
+            {
+                throw new System.IO.IOException();
+            }
         }
 
     }

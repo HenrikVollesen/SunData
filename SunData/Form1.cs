@@ -16,9 +16,9 @@ namespace SunData
         private const string CustomFormat = "yyyy-MM-dd";
 
         private int SettingsIndex = 0;
-        private AnalemmaSettings a_Settings = new(AnalemmaDataTarget, CustomFormat);
-        private AnalemmaSettings d_Settings = new(SunDataTarget, CustomFormat);
-        private AnalemmaSettings theSettings = new();
+        private SunDataSettings a_Settings = new(AnalemmaDataTarget, CustomFormat);
+        private SunDataSettings d_Settings = new(SunDataTarget, CustomFormat);
+        private SunDataSettings theSettings = new();
 
         private ProcessState _processState;
 
@@ -311,6 +311,7 @@ namespace SunData
         {
             _processState = ProcessState.processing;
             SetInfoText();
+            buttonSave_A.Enabled = false;
 
             AnalemmaLogger analemmaLogger = new AnalemmaLogger();
             try
@@ -322,6 +323,8 @@ namespace SunData
             {
                 _processState = ProcessState.failed;
             }
+
+            buttonSave_A.Enabled = true;
 
             SetInfoText();
             ResetProcessingState();
@@ -373,19 +376,26 @@ namespace SunData
             _processState = ProcessState.processing;
             SetInfoText();
             buttonSave_D.Enabled = false;
-
             labelProgress1.Visible = true;
             Util.InitProgressBar(1, progressBarSunData);
             Refresh();
             SunDataLogger sundataLogger = new SunDataLogger();
-            await sundataLogger.LogSunData(d_Settings);
-            //Thread.Sleep(5000);
+            try
+            {
+                await sundataLogger.LogSunData(d_Settings);
+                _processState = ProcessState.finished;
+            }
+            catch (System.IO.IOException)
+            {
+                _processState = ProcessState.failed;
+            }
+
             Util.InitProgressBar(1, progressBarSunData, false);
             labelProgress1.Visible = false;
-
-            _processState = ProcessState.finished;
             buttonSave_D.Enabled = true;
+
             SetInfoText();
+            ResetProcessingState();
         }
 
         /*********************************************************************
