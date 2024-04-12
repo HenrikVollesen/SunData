@@ -1,0 +1,16 @@
+{
+  "results": {
+    "sunrise": "8:39:56 AM",
+    "sunset": "4:21:21 PM",
+    "solar_noon": "12:30:38 PM",
+    "day_length": "07:41:25",
+    "civil_twilight_begin": "7:56:55 AM",
+    "civil_twilight_end": "5:04:21 PM",
+    "nautical_twilight_begin": "7:08:38 AM",
+    "nautical_twilight_end": "5:52:38 PM",
+    "astronomical_twilight_begin": "6:23:04 AM",
+    "astronomical_twilight_end": "6:38:13 PM"
+  },
+  "status": "OK",
+  "tzid": "Europe/Copenhagen"
+}
